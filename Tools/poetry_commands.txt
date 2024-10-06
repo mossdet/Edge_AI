@@ -1,0 +1,40 @@
+# Useful Poetry commands
+
+# Create new environment
+poetry init 
+# or this command to create a basic folder structure and a pyproject.toml
+poetry new myproject
+
+# Create environment using toml file
+poetry install
+
+# Others
+poetry env use /usr/bin/python3.11
+poetry env list
+poetry config virtualenvs.in-project true
+poetry --version
+poetry env info
+
+
+# Create environment for dependency managamenet only, i.e. no package mode
+# If TensorFlow plus CUDA will be installed, the Python interpreter must be <= 3.11
+	poetry new env_name
+# the toml file can then be edited to look like this
+	[tool.poetry]
+	description = "Environment for the development of ML projects"
+	authors = ["DLP"]
+	package-mode = false
+
+	[tool.poetry.dependencies]
+	python = "3.11.10"
+	tensorflow = {version = "==2.15.*", extras = ["and-cuda"]}
+	jupyterlab = "^4.2.5"
+	matplotlib = "^3.9.2"
+	pyqt5 = "^5.15.11"
+	tensorflow-hub = "^0.16.1"
+	tensorflow-datasets = "^4.9.6"
+
+	[build-system]
+	requires = ["poetry-core"]
+	build-backend = "poetry.core.masonry.api"
+

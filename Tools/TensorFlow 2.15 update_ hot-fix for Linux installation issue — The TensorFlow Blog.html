@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html class="v2" dir="ltr" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr"><head>
+<link href="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/3566091532-css_bundle_v2.css" rel="stylesheet" type="text/css">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="blogger" name="generator">
+<link href="https://blog.tensorflow.org/favicon.ico" rel="icon" type="image/x-icon">
+<link href="https://blog.tensorflow.org/2023/12/tensorflow-215-update-hot-fix-linux-installation-issue.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="The TensorFlow Blog - Atom" href="https://blog.tensorflow.org/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="The TensorFlow Blog - RSS" href="https://blog.tensorflow.org/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="The TensorFlow Blog - Atom" href="https://www.blogger.com/feeds/7864883956188652345/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="The TensorFlow Blog - Atom" href="https://blog.tensorflow.org/feeds/412368123601550351/comments/default">
+<!--Can't find substitution for tag [blog.ieCssRetrofitLinks]-->
+<link href="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/Tensorflow-septmber-update-social%20(2)%20(1).png" rel="image_src">
+<meta content="We are releasing a hot-fix for an installation issue affecting the TensorFlow installation process." name="description">
+<meta content="https://blog.tensorflow.org/2023/12/tensorflow-215-update-hot-fix-linux-installation-issue.html" property="og:url">
+<meta content="TensorFlow 2.15 update: hot-fix for Linux installation issue" property="og:title">
+<meta content="We are releasing a hot-fix for an installation issue affecting the TensorFlow installation process." property="og:description">
+<meta content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVyX9h9jqUfN0LpVCwPg0iWNd4XDkKWd5hL7Wn9CwGLBZ5NyrEFTHHXu6yCxCaLL2szdaQMCkDuRdV4-JapbV329DYTjaH6ThpbzJlbvgunZK9dUgii1kAqcs-4zhyphenhyphenccaLsfffj7K3-8HFLybyOeaHjVl_n7jdPmD33o0TERamUgTdH7H3qhBLS2GuwtY/w1200-h630-p-k-no-nu/Tensorflow-septmber-update-social%20%282%29%20%281%29.png" property="og:image">
+<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta content="https://www.gstatic.com/tf_blog/images/image_blank.png" property="og:image">
+<meta content="https://www.gstatic.com/tf_blog/images/image_blank.png" property="twitter:image">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="TensorFlow 2.15 update: hot-fix for Linux installation issue" property="twitter:title">
+<title>TensorFlow 2.15 update: hot-fix for Linux installation issue — The TensorFlow Blog</title>
+<style id="page-skin-1" type="text/css"><!--
+/* ADD YOUR CSS HERE */
+body{font-family:Roboto,sans-serif;font-size:16px;line-height:30px;-webkit-font-smoothing:antialiased;color:#000}h1{font-family:Google Sans,sans-serif;font-size:34px;font-weight:500;line-height:44px}h2{font-size:30px;line-height:40px}h2,h3{font-family:Google Sans,sans-serif;font-weight:700}h3{font-size:24px;line-height:32px}h4{font-size:20px;font-weight:500}h4,h5{font-family:Google Sans,sans-serif;line-height:26px}h5{font-size:16px;font-weight:700}h6{font-size:14px;line-height:22px}.display,h6{font-family:Google Sans,sans-serif;font-weight:700}.display{font-size:46px;line-height:56px}.hidden-text{height:1px;overflow:hidden;pointer-events:none;position:absolute;top:-10px;width:1px}img,video{border:0;height:auto;max-width:100%}body{position:relative;min-height:100vh}body.no-scroll{overflow:hidden}.content-wrap{padding-top:97px;padding-bottom:552px}@media only screen and (max-width:839px){.content-wrap{padding-top:48px}}.widget{margin:0;line-height:unset}.widget li{padding-left:12px}.widget ol,.widget ul{padding-left:40px}.widget li,.widget ol,.widget ul{line-height:unset}.tensorsite-full-footer{position:absolute;bottom:0;height:461px;width:100%}.posts-container{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;position:relative}.posts-container .tensorsite-posts__regular{-webkit-box-flex:3;-webkit-flex:3;-ms-flex:3;flex:3}.divider{width:100%;background-color:#e3e5e8;height:1px;margin-bottom:24px;z-index:1}.divider--lg-gap{margin:45px auto 25px}.divider--article-bottom{margin:30px 0}.divider--article-top{margin-bottom:36px}@media only screen and (max-width:767px){.divider--article-top{margin-bottom:24px}}.tensorsite-blog-logo{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}.tensorsite-blog-logo__image{width:auto;height:32px}.tensorsite-logo{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1}.tensorsite-logo__image{width:auto;height:32px}@media only screen and (max-width:767px){.tensorsite-logo{margin-bottom:36px}}.wrapper{overflow:hidden}.tensorsite-container{margin:48px auto;padding:0 40px;position:relative;width:auto;max-width:1420px}@media only screen and (max-width:767px){.tensorsite-container{margin:24px auto;padding:0 20px}}@media only screen and (min-width:768px){.tensorsite-container.featured{margin:48px auto -12px}}.tensorsite-container--large{margin:48px auto;padding:0 40px;position:relative;width:auto;max-width:1050px}@media only screen and (max-width:767px){.tensorsite-container--large{margin:24px auto;padding:0 20px}}.tensorsite-container--medium{margin:48px auto;padding:0 40px;position:relative;width:auto;max-width:844px}@media only screen and (max-width:767px){.tensorsite-container--medium{margin:24px auto;padding:0 20px}}.tensorsite-container--narrow{margin:48px auto;padding:0 40px;position:relative;width:auto;max-width:682px}@media only screen and (max-width:767px){.tensorsite-container--narrow{margin:24px auto;padding:0 20px}}.tensorsite-container--flex-horizontal{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}.section,body{margin:0}.tensorsite-content{border-radius:10px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;padding:26px 30px;position:relative}.tensorsite-content .spacer{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1}.tensorsite-content a:not(.tensorsite-content__button),.tensorsite-content div{-webkit-transition:color .2s linear;transition:color .2s linear}.tensorsite-content ul{list-style:none;padding:0}.tensorsite-content ul li{line-height:1;margin:8px 0}.tensorsite-content ul li:last-of-type{margin-bottom:0}.tensorsite-content p{margin:0}.tensorsite-content__image-wrapper{position:relative}.tensorsite-content__image{border-radius:10px 10px 0 0;display:block;height:100%;-o-object-fit:cover;object-fit:cover;position:absolute;width:100%;-webkit-transform:scale(1.015);transform:scale(1.015);-webkit-transition:-webkit-transform .5s ease;transition:-webkit-transform .5s ease;transition:transform .5s ease;transition:transform .5s ease,-webkit-transform .5s ease;will-change:transform}@media only screen and (max-width:850px){.tensorsite-content__image{position:relative}}.tensorsite-content__icon{position:absolute;top:15px;right:24px}.tensorsite-content__subtitle{font-family:Google Sans,sans-serif;font-size:16px;font-weight:700;line-height:26px;font-weight:500!important;color:#425066;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin-bottom:18px;position:relative}.tensorsite-content__subtitle b{margin:0 5px}.tensorsite-content__title{font-family:Google Sans,sans-serif;font-size:34px;font-weight:500;line-height:44px;font-weight:700!important;color:#425066;margin-bottom:12px}.tensorsite-content__title:last-child{margin-bottom:0}.tensorsite-content__title--grow{-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1}.tensorsite-content__info{font-size:14px;line-height:22px;color:#616161;margin-bottom:18px}.tensorsite-content__description{font-family:Roboto,sans-serif;font-size:16px;line-height:30px;color:#616161;margin-bottom:24px}a{color:#425066;-webkit-transition:color .2s linear;transition:color .2s linear}a,a:active,a:focus{text-decoration:none}a.disabled{pointer-events:none;cursor:default;color:#ccc}a.disabled .cta-icon path{fill:#ccc}a .cta-icon{-webkit-transition:margin-right .2s linear,margin-left .2s linear;transition:margin-right .2s linear,margin-left .2s linear}a .cta-icon path{fill:#425066;-webkit-transition:fill .2s linear;transition:fill .2s linear}a .cta-icon.grey path{fill:#ccc}a .cta-icon--left{-webkit-transform:rotate(180deg);transform:rotate(180deg)}a:hover{color:#ff6f00}a:hover .cta-icon path{fill:#ff6f00}.tensorsite-card{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-backface-visibility:hidden;backface-visibility:hidden;background:#fff;border-radius:10px;-webkit-box-shadow:0 0 36px rgba(0,0,0,.1);box-shadow:0 0 36px rgba(0,0,0,.1);-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;margin:24px 0;overflow:hidden;position:relative;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-transition:opacity .2s linear,-webkit-box-shadow .2s linear;transition:opacity .2s linear,-webkit-box-shadow .2s linear;transition:box-shadow .2s linear,opacity .2s linear;transition:box-shadow .2s linear,opacity .2s linear,-webkit-box-shadow .2s linear}.tensorsite-card.hidden{display:none}.tensorsite-card .divider{margin-bottom:18px}@media only screen and (max-width:850px){.tensorsite-card .divider{margin-bottom:14px}}.tensorsite-card.featured{min-height:300px}.tensorsite-card.featured .tensorsite-content{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}.tensorsite-card.featured .tensorsite-content .tensorsite-content__title{font-size:40px;line-height:54px}@media only screen and (max-width:850px){.tensorsite-card.featured .tensorsite-content .tensorsite-content__title{font-size:26px;line-height:36px}}.tensorsite-card.featured .tensorsite-content .tensorsite-content__subtitle{margin-bottom:18px}@media only screen and (max-width:850px){.tensorsite-card.featured .tensorsite-content .tensorsite-content__subtitle{margin-bottom:10px}}@media only screen and (max-width:850px){.tensorsite-card{-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;max-height:unset;max-width:600px;margin:24px auto}}.tensorsite-card:hover .tensorsite-content__title{color:#ff6f00}.tensorsite-card .tensorsite-content{padding:28px 30px 32px}.tensorsite-card .tensorsite-content .tensorsite-content__cta-wrapper,.tensorsite-card .tensorsite-content .tensorsite-content__description,.tensorsite-card .tensorsite-content .tensorsite-content__info,.tensorsite-card .tensorsite-content .tensorsite-content__subtitle,.tensorsite-card .tensorsite-content .tensorsite-content__title{position:relative}.tensorsite-card .tensorsite-content .tensorsite-content__subtitle{margin-bottom:14px}@media only screen and (max-width:1279px){.tensorsite-card .tensorsite-content .tensorsite-content__subtitle{margin-bottom:8px;line-height:24px;font-size:14px}}.tensorsite-card .tensorsite-content .tensorsite-content__title{margin-bottom:16px;font-size:30px}@media only screen and (max-width:1279px){.tensorsite-card .tensorsite-content .tensorsite-content__title{font-size:24px;margin-bottom:14px;line-height:32px}.tensorsite-card .tensorsite-content .tensorsite-content__title .no-subtitle{margin-top:32px}}.tensorsite-card .tensorsite-content .tensorsite-content__description{margin-bottom:0;display:-webkit-box;line-clamp:4;-webkit-line-clamp:4;text-overflow:ellipsis;-webkit-box-orient:vertical;overflow:hidden}.tensorsite-card .tensorsite-content .tensorsite-content__description *{color:#616161!important;font-weight:400!important}.tensorsite-card .tensorsite-content .tensorsite-content__info{font-family:Google Sans,sans-serif;margin-bottom:20px}@media only screen and (max-width:1279px){.tensorsite-card .tensorsite-content .tensorsite-content__info{line-height:24px}}@media only screen and (max-width:850px){.tensorsite-card .tensorsite-content{padding:16px 18px 20px}}.tensorsite-card .tensorsite-content__image-wrapper{background-color:#fbfcfc;overflow:hidden;position:relative;width:auto;-webkit-flex-basis:40%;-ms-flex-preferred-size:40%;flex-basis:40%;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}@media only screen and (max-width:850px){.tensorsite-card .tensorsite-content__image-wrapper{max-height:250px}}.tensorsite-card .tensorsite-content__image-wrapper.hidden{display:none}.tensorsite-card:focus,.tensorsite-card:hover{-webkit-box-shadow:0 0 64px rgba(0,0,0,.22);box-shadow:0 0 64px rgba(0,0,0,.22);cursor:pointer}.tensorsite-card__href{height:100%;left:0;opacity:0;position:absolute;top:0;width:100%;z-index:2}.tensorsite-card:first-of-type{margin-top:0}.tensorsite-card:hover .tensorsite-content__image-wrapper img,.tensorsite-card__href:focus~.tensorsite-content__image-wrapper img{-webkit-transform:scale(1.03);transform:scale(1.03);-webkit-transition:-webkit-transform 1s ease;transition:-webkit-transform 1s ease;transition:transform 1s ease;transition:transform 1s ease,-webkit-transform 1s ease}.tensorsite-detail{color:#000!important}.tensorsite-detail__title{font-family:Google Sans,sans-serif;font-size:46px;font-weight:700;line-height:56px;margin-bottom:24px}@media only screen and (max-width:767px){.tensorsite-detail__title{font-family:Google Sans,sans-serif;font-size:28px;font-weight:700;line-height:1.36;margin-bottom:16px}}.tensorsite-detail__body,.tensorsite-detail__body div,.tensorsite-detail__body div>span,.tensorsite-detail__body li>span{font-family:Roboto,sans-serif!important;font-size:16px!important;line-height:28px!important;letter-spacing:0!important}.tensorsite-detail__body b,.tensorsite-detail__body strong{font-weight:500!important}.tensorsite-detail__body h1,.tensorsite-detail__body h1>span,.tensorsite-detail__body h1>strong,.tensorsite-detail__body h2,.tensorsite-detail__body h2>span,.tensorsite-detail__body h2>strong{font-family:Google Sans,sans-serif!important;font-size:30px!important;font-weight:700!important;line-height:40px!important;margin-bottom:18px!important;margin-top:40px}@media only screen and (max-width:767px){.tensorsite-detail__body h1,.tensorsite-detail__body h1>span,.tensorsite-detail__body h1>strong,.tensorsite-detail__body h2,.tensorsite-detail__body h2>span,.tensorsite-detail__body h2>strong{font-size:24px!important;line-height:34px!important;margin-bottom:12px!important;margin-top:30px}}.tensorsite-detail__body h3,.tensorsite-detail__body h3>span,.tensorsite-detail__body h3>strong{font-family:Google Sans,sans-serif!important;font-size:26px!important;font-weight:700!important;line-height:36px!important;margin-bottom:14px!important;margin-top:40px}@media only screen and (max-width:767px){.tensorsite-detail__body h3,.tensorsite-detail__body h3>span,.tensorsite-detail__body h3>strong{font-size:22px!important;line-height:32px!important;margin-bottom:12px!important;margin-top:30px}}.tensorsite-detail__body h4,.tensorsite-detail__body h4>span,.tensorsite-detail__body h4>strong{font-family:Google Sans,sans-serif!important;font-size:20px!important;font-weight:500!important;line-height:30px!important;margin-bottom:14px!important;margin-top:40px}@media only screen and (max-width:767px){.tensorsite-detail__body h4,.tensorsite-detail__body h4>span,.tensorsite-detail__body h4>strong{margin-bottom:12px!important;margin-top:30px}}.tensorsite-detail__body ol,.tensorsite-detail__body ul{margin:24px 0}@media only screen and (max-width:767px){.tensorsite-detail__body ol,.tensorsite-detail__body ul{margin:18px 0}}.tensorsite-detail__body a{color:#425066!important;font-weight:500!important}.tensorsite-detail__body a:not(.author-link){text-decoration:underline!important}.tensorsite-detail__body a:hover{color:#ff6f00!important}.tensorsite-detail__body a.author-link{white-space:nowrap}.tensorsite-detail__body a[imageanchor]{display:block!important;float:none!important;margin-left:0!important;margin-right:0!important}.tensorsite-detail__body img{display:block}.tensorsite-detail__body img:not(.unset-width){width:100%;border-radius:4px;margin:24px 0}.tensorsite-detail__body img.unset-width{margin:0 auto 12px}.tensorsite-detail__body iframe{width:100%}.tensorsite-detail__body .gist{margin:24px 0}.tensorsite-detail__body .tr-caption-container{width:100%;padding:0;margin:24px 0}.tensorsite-detail__body .tr-caption-container img{margin:0 0 12px}.tensorsite-detail__body .tr-caption{font-size:12.8px!important;font-style:normal!important;font-family:unset!important;line-height:1.8!important;font-weight:400!important}.tensorsite-detail__body code,.tensorsite-detail__body pre[class*=language-]{background:#f5f6f7!important;font-family:Roboto Mono,monospace!important;border-radius:2px}.tensorsite-detail__body code{padding:5px 8px}.tensorsite-detail__body pre[class*=language-]{margin:24px auto!important;line-height:1.7!important;padding:24px}@media only screen and (max-width:767px){.tensorsite-detail__body pre[class*=language-]{padding:8px 12px}}.tensorsite-detail__body pre[class*=language-] code{padding:0}.tensorsite-detail__body pre[class*=language-] .token.operator{background:unset!important}.tensorsite-detail__body .separator[style*=center]>a:not([style*=float]){margin:0!important}.tensorsite-detail__contact{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;margin-bottom:36px}@media only screen and (max-width:767px){.tensorsite-detail__contact{margin-bottom:24px}}.tensorsite-detail__info{font-family:Google Sans,sans-serif;font-size:16px;font-weight:700;line-height:26px;font-weight:400;color:#616161;margin-right:25px}.tensorsite-detail-footer .article-divider{padding:30px 0}.tensorsite-detail-footer .tensorsite-chip{font-family:Roboto,sans-serif;font-size:16px;line-height:30px;color:#616161;border:1px solid #ebebeb;padding:4px 10px;display:inline-block;border-radius:4px;margin-bottom:4px;-webkit-transition:color .2s linear,background-color .2s linear;transition:color .2s linear,background-color .2s linear;text-decoration:none}.tensorsite-detail-footer .tensorsite-chip:hover{background-color:hsla(213,7%,76%,.2)}.tensorsite-detail-footer .tensorsite-chip:focus{background-color:hsla(213,7%,76%,.26)}.tensorsite-detail-footer .tensorsite-chip:active{background-color:hsla(213,7%,76%,.32)}.tensorsite-next{background:#f5f6f7;padding:48px 0 60px;display:none}@media only screen and (max-width:767px){.tensorsite-next{padding:48px 0 0}}.tensorsite-next.active{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}.tensorsite-next__title{font-family:Google Sans,sans-serif;font-size:46px;font-weight:700;line-height:56px;margin-bottom:36px;text-align:center}@media only screen and (max-width:767px){.tensorsite-next__title{font-family:Google Sans,sans-serif;font-size:28px;font-weight:700;line-height:1.36;margin-bottom:24px}}#pagination-container{display:none}.pagination{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between}.pagination .arrow-link{font-family:Google Sans,sans-serif;font-size:16px;font-weight:700;line-height:20px;display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;text-decoration:none}.pagination .arrow-link .cta-icon{height:12px}.pagination .arrow-link .cta-icon--left{margin-left:4px}.pagination .arrow-link .cta-icon--right{margin-right:4px}.pagination .arrow-link>span{padding:0 8px}.pagination .arrow-link:hover .cta-icon--left{margin-left:0;margin-right:4px}.pagination .arrow-link:hover .cta-icon--right{margin-left:4px;margin-right:0}.filter-page__title{font-family:Google Sans,sans-serif;font-size:46px;font-weight:700;line-height:56px;line-height:46px;margin-bottom:20px}@media only screen and (max-width:767px){.filter-page__title{font-family:Google Sans,sans-serif;font-size:30px;font-weight:700;line-height:40px}}.filter-page__subtitle{font-size:18px;line-height:30px;max-width:735px}@media only screen and (max-width:767px){.filter-page__subtitle{font-family:Roboto,sans-serif;font-size:16px;line-height:28px}}.filter-page__subtitle a{text-decoration:underline;font-weight:500}.tensorsite-button{font-family:Google Sans,sans-serif;font-size:16px;font-weight:700;line-height:20px;border-radius:8px;-webkit-box-shadow:0 0 20px transparent;box-shadow:0 0 20px transparent;display:inline-block;height:auto;outline:none;padding:13px 22px;text-transform:none;-webkit-transition:background .3s linear,color .3s linear,-webkit-box-shadow .3s linear;transition:background .3s linear,color .3s linear,-webkit-box-shadow .3s linear;transition:box-shadow .3s linear,background .3s linear,color .3s linear;transition:box-shadow .3s linear,background .3s linear,color .3s linear,-webkit-box-shadow .3s linear}.tensorsite-button:active{-webkit-box-shadow:none;box-shadow:none}.tensorsite-button--orange{background:-webkit-gradient(linear,left top,right top,from(#ff6f00),to(#ff9100));background:linear-gradient(90deg,#ff6f00,#ff9100);color:#fff;overflow:hidden;position:relative;z-index:1}.tensorsite-button--orange:after{background:#ff6f00;bottom:0;content:"";left:0;opacity:0;position:absolute;right:0;top:0;-webkit-transition:opacity .3s;transition:opacity .3s;z-index:-1}.tensorsite-button--orange:focus:after,.tensorsite-button--orange:hover:after{opacity:1}.tensorsite-button--white{background:#fff;color:#425066}.tensorsite-button--white:focus,.tensorsite-button--white:hover{background:#425066;color:#fff}.tensorsite-footer{margin-top:-92px;overflow:hidden;padding-top:92px;pointer-events:none;position:relative}.tensorsite-footer:after,.tensorsite-footer:before{bottom:0;content:"";display:block;position:absolute}.tensorsite-footer:before{background:#ff6f00;left:0;right:calc(1440px + ((100% - 1440px) / 2) + 96px);top:184px}.tensorsite-footer:after{background:#ff9100;left:calc(1440px + ((100% - 1440px) / 2) + 96px);right:0;top:0}.tensorsite-footer.grey{background-color:#f5f6f7}.tensorsite-footer__container{background-image:-webkit-gradient(linear,right top,left top,color-stop(18%,#ff9100),color-stop(86%,#ff6f00));background-image:linear-gradient(-90deg,#ff9100 18%,#ff6f00 86%);margin:0 auto;max-width:calc(100% - 192px);min-height:210px;padding:70px 0;position:relative}@media screen and (min-width:1440px){.tensorsite-footer__container{max-width:1248px}}@media only screen and (max-width:767px){.tensorsite-footer__container{background-image:-webkit-gradient(linear,right top,left top,from(#ff9100),to(#ff6f00));background-image:linear-gradient(-90deg,#ff9100,#ff6f00);padding-bottom:100px}}.tensorsite-footer__side{bottom:0;position:absolute;width:192px}.tensorsite-footer__side:before{content:"";display:block;height:92px;margin-top:-92px;width:100%}.tensorsite-footer__side--left{background:#ff6f00;left:-192px;top:92px}.tensorsite-footer__side--left:before{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 92'%3E%3Cpath d='M162 8L96 46 30 84a60.7 60.7 0 0 1-30 8h192V0a60.7 60.7 0 0 0-30 8z' fill='%23FF6F00'/%3E%3C/svg%3E")}.tensorsite-footer__side--right{background:#ff9100;right:-192px;top:0}.tensorsite-footer__side--right:before{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 92'%3E%3Cpath d='M162 8L96 46 30 84a60.7 60.7 0 0 1-30 8h192V0a60.7 60.7 0 0 0-30 8z' fill='%23FF9100'/%3E%3C/svg%3E")}.tensorsite-footer__content{pointer-events:auto}.tensorsite-footer__content .tensorsite-content{margin:0 auto;max-width:650px;padding:0}.tensorsite-footer__content .tensorsite-content__title{font-family:Google Sans,sans-serif;font-size:30px;font-weight:700;line-height:40px;color:#fff;padding:0;text-align:center;width:auto}.tensorsite-footer__content .tensorsite-content__description{font-size:18px;line-height:30px;color:#fff;text-align:center}.tensorsite-footer__content .tensorsite-content__cta-wrapper{margin-top:10px;text-align:center}.tensorsite-footer__content .tensorsite-content .tensorsite-content__title+.tensorsite-content__cta-wrapper{margin-top:40px}@media only screen and (max-width:767px){.tensorsite-footer__content{margin:0 -76px}}.tensorsite-footer__lines{background:url("https://www.gstatic.com/tf_blog/images/tf_lines.svg") bottom/100% auto no-repeat;bottom:0;left:50%;max-width:1720px;min-width:1320px;pointer-events:none;position:absolute;top:0;-webkit-transform:translate(-50%);transform:translate(-50%);width:90vw;z-index:2}@media only screen and (max-width:767px){.tensorsite-footer__lines{-webkit-transform:translate(-30%);transform:translate(-30%)}}@media only screen and (max-width:480px){.tensorsite-footer__lines{-webkit-transform:translate(-20%);transform:translate(-20%)}}.icon-link{border-radius:50%;height:42px;width:42px;display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-transition:background .2s linear;transition:background .2s linear;position:relative}.icon-link:hover{background-color:hsla(213,7%,76%,.2)}.icon-link:focus{background-color:hsla(213,7%,76%,.26)}.icon-link:active{background-color:hsla(213,7%,76%,.32)}.icon-tooltip{left:-3rem}.icon-tooltip,.icon-tooltip-github{position:absolute;width:10rem;background-color:#f5f6f7;top:2.25rem;z-index:999;border-radius:.5rem;text-align:center;color:#425066;display:none;-webkit-box-shadow:0 1px 6px 0 rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);box-shadow:0 1px 6px 0 rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15)}.icon-tooltip-github{left:-7rem}.footer__links .footer-link:not(:first-child):before{content:"\B7";color:#999;font-weight:500;margin:5px}.social-icons__container-header,.social-icons__links{height:100%;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}.social-icons__container-header{margin-right:14px}.social-icons__container-header .icon-link{margin-right:0;margin-left:18px}@media only screen and (max-width:1000px){.social-icons__container-header{display:none}}.social-icons__container-footer{background:#f9f9f9;padding:36px 40px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}.social-icons__container-footer .icon-link:not(:last-of-type){margin-right:24px}.social-icons__container-footer .footer__side--right{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;gap:20px}@media only screen and (max-width:767px){.social-icons__container-footer .footer__side--right{display:block}.social-icons__container-footer .footer__side--right .social-icons__links{place-content:center}}@media only screen and (max-width:767px){.social-icons__container-footer{-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}}.header__overlay{height:100%;left:0;position:absolute;width:100%;background-color:rgba(0,0,0,.4);-webkit-animation:fade-in .4s cubic-bezier(.39,.575,.565,1);animation:fade-in .4s cubic-bezier(.39,.575,.565,1);opacity:0;top:0;z-index:-1}.header__overlay.show{opacity:1;z-index:800;-webkit-transition:opacity .2s ease-in-out;transition:opacity .2s ease-in-out}.header{position:fixed;z-index:700;top:0;width:100%;-webkit-box-shadow:0 1px 2px 0 rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);box-shadow:0 1px 2px 0 rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);height:97px}@media only screen and (max-width:839px){.header{height:48px}}.header .top-row{background:#fff;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;padding:0 24px;height:48px;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;border-bottom:1px solid #e6e6e6}@media only screen and (max-width:839px){.header .top-row{padding:0 16px}}.header .top-row__left,.header .top-row__right{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-flex:0;-webkit-flex:0 0 auto;-ms-flex:0 0 auto;flex:0 0 auto;height:100%}.header .nav-row,.header .top-row__left,.header .top-row__right{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}.header .nav-row{background:#f5f6f7;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;width:100%}.header .nav-items{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;height:48px;position:relative;padding:0 24px}@media only screen and (max-width:839px){.header .nav-items{display:none}}.header .nav-items tab{position:relative}.header .nav-items tab.active .header__nav-item:after,.header .nav-items tab:hover .header__nav-item:after{background:#425066}@media only screen and (max-width:839px){.header .header__cta,.header .nav-items{display:none}}.header__search-container{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;margin:6px 0 6px 24px;overflow:hidden;position:relative;margin-right:36px;border-radius:4px}@media only screen and (max-width:767px){.header__search-container:not(.mobile){display:none}}.header__search-container.mobile{margin:0 0 20px}.header__search-container.mobile #searchform,.header__search-container.mobile .searchbox{width:100%}.header__search-container .searchbox{border-radius:2px}.header__search-container .searchbox input{font-family:Roboto,sans-serif;font-size:16px;line-height:30px;background:#f5f6f7;color:#425066;border:0;margin:0;height:20px;outline:0;padding:8px 8px 8px 40px;width:100%;-webkit-transition:background .2s;transition:background .2s}.header__search-container .searchbox input::-webkit-input-placeholder{color:#425066}.header__search-container .searchbox input:-ms-input-placeholder,.header__search-container .searchbox input::-ms-input-placeholder{color:#425066}.header__search-container .searchbox input::placeholder{color:#425066}.header__search-container .searchbox input:hover{background:#e8eaed}.header__search-container .material-icons{color:#425066;left:8px;position:absolute;top:6px;-webkit-transition:color .2s;transition:color .2s}.header__cta{font-family:Google Sans,sans-serif;font-size:16px;font-weight:700;line-height:20px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}.header__cta.mobile{padding:18px 0}.header__cta:hover .cta-icon{margin-left:0;margin-right:12px}.header__cta .cta-icon{-webkit-transition:margin-right .2s linear,margin-left .2s linear;transition:margin-right .2s linear,margin-left .2s linear;margin-left:4px;margin-right:8px;-webkit-transform:rotate(180deg);transform:rotate(180deg)}.header__nav-item{font-family:Google Sans,sans-serif;font-size:14px;font-weight:700;line-height:22px;color:#677282;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;padding:0 36px 0 0;height:100%;text-transform:none}.header__nav-item:hover{color:#677282}.header__nav-item.mobile{font-weight:500;padding:0}.header__nav-item.mobile:hover{color:#ff6f00}.header__nav-item:after{bottom:0;border-radius:3px 3px 0 0;content:"";display:block;height:3px;left:calc(50% - 18px);min-width:20px;position:absolute;right:0;-webkit-transform:translateX(-50%);transform:translateX(-50%);width:calc(100% - 44px)}.header__hamburger{border:0;background:none;outline:none;padding:0;margin:1px 8px 0 -4px;padding:8px;color:rgba(0,0,0,.65);cursor:pointer}@media only screen and (min-width:840px){.header__hamburger{display:none}}.header__side-menu{background-color:#fff;bottom:0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;left:0;overflow:auto;position:fixed;top:0;-webkit-transform:translateX(-100%);transform:translateX(-100%);-webkit-transition:-webkit-transform .2s cubic-bezier(.215,.61,.355,1);transition:-webkit-transform .2s cubic-bezier(.215,.61,.355,1);transition:transform .2s cubic-bezier(.215,.61,.355,1);transition:transform .2s cubic-bezier(.215,.61,.355,1),-webkit-transform .2s cubic-bezier(.215,.61,.355,1);z-index:900}.header__side-menu.is-open{height:100%;-webkit-transform:translateX(0);transform:translateX(0);width:80%}.header__side-menu__content{height:100%;padding:18px 16px 0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}.header__side-menu__content .spacer{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1}.header__side-menu__title{font-size:18px;line-height:30px;font-weight:500;margin-bottom:12px}.header__side-menu__items{list-style:none}.header__side-menu__items li{padding:12px 0}.header__side-menu__bottom{border-top:1px solid #e6e6e6}.header__side-menu__logo-container{background:#fff;height:48px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;padding:0 16px;border-bottom:1px solid #e6e6e6}.tensorsite__tags{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;height:650px;margin-left:40px;padding-top:40px;position:-webkit-sticky;position:sticky;top:97px}@media only screen and (max-width:850px){.tensorsite__tags{display:none}}.tensorsite__tags h2{margin-bottom:32px}.tensorsite__tags .tensorsite-tag{font-family:Google Sans,sans-serif;font-size:20px;font-weight:500;line-height:26px;color:#425066;display:block;padding:20px 0;border-bottom:1px solid #e3e5e8;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-transition:color .2s linear;transition:color .2s linear}.tensorsite__tags .tensorsite-tag:hover{color:#ff6f00}.tensorsite__tags .tensorsite-tag:hover .cta-icon{margin-left:12px;margin-right:0}.tensorsite__tags .tensorsite-tag .cta-icon{-webkit-transition:margin-right .2s linear,margin-left .2s linear;transition:margin-right .2s linear,margin-left .2s linear;margin-left:8px;margin-right:4px}.community-icon{width:24px;height:24px;vertical-align:middle}
+]
+
+--></style>
+<!-- Custom TensorFlow Fonts -->
+<link href="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/css.css" rel="stylesheet">
+<!-- End Custom TensorFlow Fonts -->
+<!-- Code Block Syntax Highlighting -->
+<link href="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/prism.css" rel="stylesheet">
+<script type="text/javascript" async="" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/js"></script><script async="" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/analytics.js"></script><script src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/prism.js" type="text/javascript"></script>
+<script src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/prism-autoloader.min.js"></script>
+<!-- End Code Block Syntax Highlighting -->
+<!-- Image Zoom -->
+<link href="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/zoom.css" rel="stylesheet">
+<script defer="defer" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/zoom-vanilla.min.js" type="text/javascript"></script>
+<!-- End Image Zoom-->
+<link href="https://www.gstatic.com/tf_blog/images/favicon.png" rel="shortcut icon" type="image/png">
+<script type="text/javascript">
+        //<![CDATA[
+
+        const qs = (string, el = document) => el.querySelector(string);
+        const qsa = (string, el = document) => el.querySelectorAll(string);
+
+        class App {
+            constructor() {
+                this.body = qs('body');
+                this.detailBody = qs('.tensorsite-detail__body');
+
+                this.overlay = qs('.header__overlay');
+                this.hamburger = qs('.header__hamburger');
+                this.sideMenu = qs('.header__side-menu');
+
+                this.detailBodies = qsa('.tensorsite-detail__body');
+
+                this.searchForms = qsa('.searchbox');
+                this.searchInputs = qsa('.search-input');
+
+                this.homeHref = qs('#home-href');
+                this.featuredCard = qs('.tensorsite-card.featured');
+                this.featuredPostHref =  this.featuredCard && this.featuredCard
+                          .querySelector('.tensorsite-card__href')
+                          .getAttribute('href');
+                this.cards = qsa('.tensorsite-card');
+                this.images = qsa('img[border]');
+                this.cardDescriptions = qsa('.tensorsite-content__description');
+                this.hiddenDescription = qsa('.tensorsite-detail__description');
+
+                this.iconLinks = qs('.social-icons__links').children
+                this.iconTooltips = qsa('[class^="icon-tooltip"]')
+
+                this._toggleMobileMenu = this._toggleMobileMenu.bind(this);
+                this._closeMenu = this._closeMenu.bind(this);
+                this._onResize = this._onResize.bind(this);
+                this._getScreen = this._getScreen.bind(this);
+                this._searchGoogle = this._searchGoogle.bind(this);
+                this._handleSearchKeypress = this._handleSearchKeypress.bind(this);
+                this._removeDividerAboveImage();
+                this._setAllTagActive();
+                this._showFeaturedPost();
+                this._redirectWithMaxResults();
+                this._makeImagesZoomable();
+                this._removeCardLineBreaks();
+                this._getNextPost().then(()=>{
+                  this._removeCardLineBreaks();
+                })
+
+                this.addEventListeners();
+            }
+
+            addEventListeners() {
+                window.addEventListener('resize', this._onResize);
+                this.hamburger.addEventListener('click', this._toggleMobileMenu);
+                this.searchForms.forEach(el => el.addEventListener('submit', this._searchGoogle));
+                this.searchInputs.forEach(el => el.addEventListener('keypress', this._handleSearchKeypress));
+
+                Array.from(this.iconLinks).forEach((icon, i) => {
+                    icon.addEventListener("mouseover", () => icon.querySelectorAll('[class^="icon-tooltip"]')[0].style.display = 'block');
+                    icon.addEventListener("mouseout",  () => icon.querySelectorAll('[class^="icon-tooltip"]')[0].style.display = 'none');
+                  })
+            }
+
+            _getNextPost() {
+              return new Promise((resolve) => {
+                const nextHref = qs('.tensorsite-detail__next-url');
+
+                  if (this.detailBody && nextHref) {
+                    let request = new XMLHttpRequest();
+                    request.open('GET', nextHref.getAttribute('href'), true);
+
+                    request.onload = function() {
+                      if (this.status >= 200 && this.status < 400) {
+                        // Success! Should be an HTML response
+
+                        // Save html in variable so you're able to query select
+                        const parser = new DOMParser();
+                        const html = parser.parseFromString(this.response, "text/html");
+
+                        const nextTitle = html.querySelector('.tensorsite-detail__title');
+                        const nextDesc = html.querySelector('.tensorsite-detail__description');
+                        const nextTags = html.querySelector('.tensorsite-detail__tags');
+                        const nextHref = qs('.tensorsite-detail__next-url').getAttribute('href');
+                        const nextImgUrl = html.querySelector('.tensorsite-detail__main-image');
+
+                        const nextTitleEl = document.querySelector('.tensorsite-content__title.next');
+                        const nextDescEl = document.querySelector('.tensorsite-content__description.next');
+                        let nextTagsEl = document.querySelector('.tensorsite-content__subtitle.next');
+                        const nextHrefEl = document.querySelector('.tensorsite-card__href.next');
+                        const nextImgEl = document.querySelector('.tensorsite-content__image-wrapper');
+
+                        const nextContainer = qs('.tensorsite-next');
+                        const footer = qs('.tensorsite-footer');
+
+                        if (nextTitleEl && nextTitle) {
+                            nextTitleEl.innerHTML = nextTitle.innerHTML;
+                        }
+                        if (nextDescEl && nextDesc) {
+                            nextDescEl.innerHTML = nextDesc.innerHTML;
+                        }
+                        if (nextTagsEl && nextTags) {
+                            nextTagsEl.innerHTML = nextTags.innerHTML;
+                        }
+                        if (nextHref && nextHrefEl) {
+                            nextHrefEl.setAttribute('href', nextHref);
+                        }
+                        if (nextImgEl && nextImgUrl) {
+                          // If Blogger can't find a firstImageUrl, it returns a
+                          // message informing us of that, so this checks
+                          // if the string is a URL
+                          if(!/http/.test(nextImgUrl.innerHTML)){
+                            nextImgEl.classList.add('hidden');
+                          } else {
+                            nextImgEl.querySelector('img').src = nextImgUrl.innerHTML;
+                          }
+                        }
+
+                        if (nextHref) {
+                          nextContainer.classList.add('active');
+                          footer.classList.add('grey');
+                        }
+
+                        resolve();
+                      }
+                      else {
+                          // We reached our target server, but it returned an error
+                          console.error('Error: Could not get the next title');
+                      }
+                    };
+
+                    request.send();
+                  }
+                })
+            }
+
+            get isMenuOpen() {
+                return this.sideMenu.classList.contains('is-open');
+            }
+
+            _handleSearchKeypress(e) {
+              if (e.which == 13) {
+                    this._searchGoogle();
+                }
+            }
+
+            _searchGoogle(e) {
+                e.preventDefault();
+                const {value} = e.target.querySelector('.search-input');
+                window.location.href = 'https://www.google.com/search?q=site%3A' + window.location.hostname + '%20' + value;
+            }
+
+            _toggleMobileMenu() {
+                this.body.classList.toggle('no-scroll');
+                this.overlay.classList.toggle('show');
+                this.sideMenu.classList.toggle('is-open');
+
+                if (this.isMenuOpen) {
+                    this.overlay.addEventListener('click', this._closeMenu);
+                } else {
+                    this.overlay.removeEventListener('click', this._closeMenu);
+                }
+            }
+
+            _closeMenu(e) {
+                if (this.isMenuOpen) {
+                    this._toggleMobileMenu();
+                }
+            }
+
+            _onResize() {
+                if (this._getScreen().width > 839 && this.isMenuOpen) {
+                    this._closeMenu();
+                }
+            }
+
+            _getScreen() {
+              return {
+                scrollY: window.scrollY,
+                width: window.innerWidth,
+                height: window.innerHeight,
+              }
+            };
+
+            _removeDividerAboveImage() {
+              if (this.detailBody
+                && this.detailBody.firstElementChild
+                && this.detailBody.firstElementChild.querySelector('img')) {
+                    const firstDivider = qs('.divider');
+                    firstDivider.style.display = 'none';
+              }
+            }
+
+            _isCurrentPathAllPosts(){
+              const {pathname, search} = window.location;
+              return pathname === '/' || (pathname === '/search' && !/label/.test(search))
+            }
+
+            _setAllTagActive() {
+              if(this._isCurrentPathAllPosts()){
+                const allTag = qs('.header__nav-item.all');
+                allTag.parentElement.classList.add('active');
+              }
+            }
+
+            // Shows featured post only if not on the home page
+            _showFeaturedPost() {
+              if (window.location.pathname === '/' && this.featuredCard) {
+                  // If any posts in the list have the same href, hide them.
+                  // Using a boolean in order to skip the first match
+                  // since that is the actual featured card.
+                  let skippedFirst = false;
+                  this.cards.forEach(card => {
+                    const link = card
+                      .querySelector('.tensorsite-card__href')
+                      .getAttribute('href');
+
+                    if (link === this.featuredPostHref) {
+                      if (skippedFirst) {
+                        card.classList.add('hidden');
+                      }
+                      skippedFirst = true;
+                    }
+
+                  })
+              }
+            }
+
+            _makeImagesZoomable(){
+              this.images.forEach(image => {
+                image.setAttribute('data-action', 'zoom');
+
+                if(/a/i.test(image.parentNode.tagName)){
+                  image.parentNode.replaceWith(image)
+                }
+              })
+            }
+
+            // Adds max-results query param if URL contains a label filter but
+            // doesn't contain max-results
+            _redirectWithMaxResults(){
+              const {search} = window.location;
+              const isLabelMatch = /(tensorflow|tfx|community)/gi.test(search)
+
+              if(isLabelMatch && !/max-results/.test(search)){
+                window.location.href = window.location.href + '&max-results=20'
+              }
+            }
+
+            _removeCardLineBreaks(){
+              const descriptions = this.cardDescriptions || [this.hiddenDescription];
+              if(descriptions){
+                descriptions.forEach(node=> {
+                  let stringArray = node.innerText.split(/(\r\n|\n|\r)/g);
+                  for(let i = stringArray.length; i > 0; i--){
+                    if(/(\r\n|\n|\r)/.test(stringArray[i]) || stringArray[i] === ''){
+                      let j = i - 1;
+                      while(j > 0 && (/(\r\n|\n|\r)/.test(stringArray[j]) || stringArray[j] === '')){
+                        stringArray.splice(j, 1);
+                        j--
+                      }
+                    }
+                  }
+                  return node.innerText = stringArray.join('')
+                })
+              }
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new App();
+        });
+
+        //]]>
+        </script>
+<script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-142343919-1', 'auto', 'blogger');
+        ga('blogger.send', 'pageview');
+      </script>
+<link href="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/authorization.css" media="all" onload="if(media!='all')media='all'" rel="stylesheet"><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=7864883956188652345&amp;zx=d35eb3e5-fe0b-442a-96e7-08654adb5d9c' rel='stylesheet'/></noscript>
+<meta name="google-adsense-platform-account" content="ca-host-pub-1556223355139109">
+<meta name="google-adsense-platform-domain" content="blogspot.com">
+
+</head>
+<body>
+<div class="header__overlay"></div>
+<div class="section" id="nav"><div class="widget HTML" data-version="1" id="HTML1">
+<header class="header">
+<div aria-hidden="true" data-href="https://blog.tensorflow.org/" hidden="true" id="home-href"></div>
+<div class="top-row">
+<div class="top-row__left">
+<button aria-label="Toggle menu" class="header__hamburger" type="button">
+<i class="material-icons">menu</i>
+</button>
+<a class="tensorsite-blog-logo" href="https://blog.tensorflow.org/">
+<img alt="TensorFlow Blog Logo" class="tensorsite-blog-logo__image" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/tfblog_logo.svg">
+</a>
+</div>
+<div class="top-row__right">
+<div class="header__search-container">
+<form action="" class="searchbox">
+<input aria-label="Search box" class="search-input" name="q" onblur='if (this.value=="")                             {this.value="Search the Blog";}' onfocus='if                             (this.value=="Search the Blog") {this.value=""}' placeholder="Search the Blog" type="text">
+<i class="material-icons">search</i>
+<input style="visibility:hidden;position:absolute" type="submit">
+</form>
+</div>
+<a class="header__cta" href="https://www.tensorflow.org/">
+<svg class="cta-icon" height="12" viewBox="0 0 18 18" width="12" xmlns="http://www.w3.org/2000/svg">
+<g fill="none" fill-rule="evenodd" transform="translate(-3 -3)">
+<rect height="24" width="24"></rect>
+<path d="M20.55,10.95 L13.05,3.45 C12.45,2.85 11.55,2.85 10.95,3.45 C10.35,4.05 10.35,4.95 10.95,5.55 L15.9,10.5 L4.5,10.5 C3.6,10.5 3,11.1 3,12 C3,12.9 3.6,13.5 4.5,13.5 L15.9,13.5 L10.95,18.45 C10.35,19.05 10.35,19.95 10.95,20.55 C10.95,20.55 10.95,20.55 10.95,20.55 C11.55,21.15 12.45,21.15 13.05,20.55 C13.05,20.55 13.05,20.55 13.05,20.55 L20.55,13.05 C21.15,12.45 21.15,11.55 20.55,10.95 C20.55,10.95 20.55,10.95 20.55,10.95 Z" fill="#000"></path>
+</g>
+</svg>
+
+                                    Return to TensorFlow Home
+                                </a>
+</div>
+</div>
+<div class="nav-row">
+<div class="nav-items">
+<tab>
+<a class="header__nav-item all" dir="ltr" href="https://blog.tensorflow.org/">
+All
+</a>
+</tab>
+<tab>
+<a class="header__nav-item" dir="ltr" href="https://blog.tensorflow.org/search?label=TensorFlow+Core&amp;max-results=20">
+TensorFlow Core
+</a>
+</tab>
+<tab>
+<a class="header__nav-item" dir="ltr" href="https://blog.tensorflow.org/search?label=TensorFlow.js&amp;max-results=20">
+TensorFlow.js
+</a>
+</tab>
+<tab>
+<a class="header__nav-item" dir="ltr" href="https://blog.tensorflow.org/search?label=TensorFlow+Lite&amp;max-results=20">
+TensorFlow Lite
+</a>
+</tab>
+<tab>
+<a class="header__nav-item" dir="ltr" href="https://blog.tensorflow.org/search?label=TFX&amp;max-results=20">
+TFX
+</a>
+</tab>
+<tab>
+<a class="header__nav-item" dir="ltr" href="https://blog.tensorflow.org/search?label=Community&amp;max-results=20">
+Community
+</a>
+</tab>
+</div>
+<section class="social-icons">
+<div class="social-icons__container-header">
+<div class="social-icons__links">
+<a class="icon-link" href="https://discuss.tensorflow.org/" rel="noopener noreferrer" target="_blank">
+<img alt="TensorFlow Forum" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/ic_forum_2.svg">
+<div class="icon-tooltip" style="display: none;">TensorFlow Forum</div>
+</a>
+<a class="icon-link" href="https://www.youtube.com/tensorflow" rel="noopener noreferrer" target="_blank">
+<img alt="TensorFlow YouTube" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/ic_youtube.svg">
+<div class="icon-tooltip" style="display: none;">TensorFlow YouTube</div>
+</a>
+<a class="icon-link" href="https://twitter.com/TensorFlow" rel="noopener noreferrer" target="_blank">
+<img alt="TensorFlow Twitter" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/ic_twitter.svg">
+<div class="icon-tooltip">TensorFlow Twitter</div>
+</a>
+<a class="icon-link" href="https://github.com/tensorflow" rel="noopener noreferrer" target="_blank">
+<img alt="TensorFlow GitHub" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/ic_github.svg">
+<div class="icon-tooltip-github">TensorFlow GitHub</div>
+</a>
+</div>
+</div>
+</section>
+</div>
+</header>
+<div class="header__side-menu">
+<div class="header__side-menu__logo-container">
+<a class="tensorsite-blog-logo" href="https://blog.tensorflow.org/">
+<img alt="TensorFlow Blog Logo" class="tensorsite-blog-logo__image" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/tfblog_logo.svg">
+</a>
+</div>
+<div class="header__side-menu__content">
+<div class="header__side-menu__items">
+<div class="header__search-container mobile">
+<form action="" class="searchbox">
+<input aria-label="Search box" class="search-input" name="q" onblur='if (this.value=="")                             {this.value="Search the Blog";}' onfocus='if                             (this.value=="Search the Blog") {this.value=""}' placeholder="Search the Blog" type="text">
+<i class="material-icons">search</i>
+<input style="visibility:hidden;position:absolute" type="submit">
+</form>
+</div>
+<div class="header__side-menu__title">Tags</div>
+<tab>
+<li>
+<a class="header__nav-item mobile" dir="ltr" href="https://blog.tensorflow.org/">
+All
+</a>
+</li>
+</tab>
+<tab>
+<li>
+<a class="header__nav-item mobile" dir="ltr" href="https://blog.tensorflow.org/search?label=TensorFlow+Core&amp;max-results=20">
+TensorFlow Core
+</a>
+</li>
+</tab>
+<tab>
+<li>
+<a class="header__nav-item mobile" dir="ltr" href="https://blog.tensorflow.org/search?label=TensorFlow.js&amp;max-results=20">
+TensorFlow.js
+</a>
+</li>
+</tab>
+<tab>
+<li>
+<a class="header__nav-item mobile" dir="ltr" href="https://blog.tensorflow.org/search?label=TensorFlow+Lite&amp;max-results=20">
+TensorFlow Lite
+</a>
+</li>
+</tab>
+<tab>
+<li>
+<a class="header__nav-item mobile" dir="ltr" href="https://blog.tensorflow.org/search?label=TFX&amp;max-results=20">
+TFX
+</a>
+</li>
+</tab>
+<tab>
+<li>
+<a class="header__nav-item mobile" dir="ltr" href="https://blog.tensorflow.org/search?label=Community&amp;max-results=20">
+Community
+</a>
+</li>
+</tab>
+</div>
+<div class="spacer"></div>
+<div class="header__side-menu__bottom">
+<a class="header__cta mobile" href="https://www.tensorflow.org/">
+                                Return to TensorFlow Home
+                            </a>
+</div>
+</div>
+</div>
+</div></div>
+<div class="content-wrap">
+<div class="section" id="blog"><div class="widget FeaturedPost" data-version="1" id="FeaturedPost1">
+</div><div class="widget Blog" data-version="1" id="Blog1">
+<div class="tensorsite-container--narrow">
+<div class="tensorsite-detail">
+<a aria-hidden="true" class="tensorsite-detail__next-url" hidden="true" href="https://blog.tensorflow.org/2023/11/half-precision-inference-doubles-on-device-inference-performance.html"></a>
+<div aria-hidden="true" class="tensorsite-detail__current-url" hidden="true">https://blog.tensorflow.org/2023/12/tensorflow-215-update-hot-fix-linux-installation-issue.html</div>
+<div aria-hidden="true" class="tensorsite-detail__tags" hidden="true">
+<span>Announcement</span>
+<b class="label-divider-dot">·</b>
+<span>Explore</span>
+</div>
+<div aria-hidden="true" class="tensorsite-detail__main-image" hidden="true">
+https://blogger.googleusercontent.com/img/b/R29vZ2xl/
+AVvXsEgVyX9h9jqUfN0LpVCwPg0iWNd4XDkKWd5hL7Wn9CwGLBZ5NyrEFTHHXu6yCxCaLL2szdaQMCkDuRdV4-
+JapbV329DYTjaH6ThpbzJlbvgunZK9dUgii1kAqcs-4zhyphenhyphenccaLsfffj7K3-8HFLybyOeaHjVl_n7jdPmD33o0TERamUgTdH7H3qhBLS2GuwtY/
+s1600/Tensorflow-septmber-update-social%20%282%29%20%281%29.png
+</div>
+<p aria-hidden="true" class="tensorsite-detail__description" hidden="true">
+<span class="tensorsite-content__info">
+December 05, 2023 —
+                                          </span>
+<em>Posted by the TensorFlow team</em>We are releasing a hot-fix for an 
+installation issue affecting the TensorFlow installation process. The 
+TensorFlow 2.15.0 Python package was released such that it requested 
+tensorrt-related packages that cannot be found unless the user installs 
+them beforehand or provides additional installation flags. This 
+dependency affected anyone installing TensorFlow 2.15 alongsi…
+</p>
+<div class="tensorsite-content__subtitle">
+<a href="https://blog.tensorflow.org/search?label=Announcement&amp;max-results=20">
+<span>Announcement</span>
+</a>
+<b class="label-divider-dot">·</b>
+<a href="https://blog.tensorflow.org/search?label=Explore&amp;max-results=20">
+<span>Explore</span>
+</a>
+<b class="label-divider-dot">·</b>
+<img alt="Google Article" class="community-icon" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/ic_google.svg">
+</div>
+<div class="tensorsite-detail__title">
+TensorFlow 2.15 update: hot-fix for Linux installation issue
+</div>
+<div class="tensorsite-detail__contact">
+<div class="tensorsite-detail__info">
+<span class="tensorsite-detail__timestamp">December 05, 2023</span>
+</div>
+<a class="icon-link" href="https://twitter.com/intent/tweet?text=%22TensorFlow%202.15%20update:%20hot-fix%20for%20Linux%20installation%20issue%22%20from%20the%20TensorFlow%20Blog%0A%0Ahttps://blog.tensorflow.org/2023/12/tensorflow-215-update-hot-fix-linux-installation-issue.html" rel="noopener noreferrer" target="_blank" title="Share this post on Twitter">
+<svg alt="Twitter Social Icon" class="twitter-icon social-icon" height="19" viewBox="0 0 23 19" width="23" xmlns="http://www.w3.org/2000/svg">
+<g fill="none" fill-rule="evenodd" transform="translate(-7 -9)">
+<rect height="36" width="36"></rect>
+<path d="M14.076,27.2827953 C22.566,27.2827953 27.21,20.2477953 27.21,14.1477953 C27.21,13.9477953 27.21,13.7487953 27.197,13.5507953 C28.1,12.8977953 28.88,12.0887953 29.5,11.1617953 C28.657,11.5347953 27.764,11.7797953 26.848,11.8877953 C27.812,11.3107953 28.533,10.4037953 28.878,9.33479527 C27.972,9.87179527 26.98,10.2507953 25.947,10.4547953 C24.198,8.59579527 21.274,8.50679527 19.415,10.2547953 C18.217,11.3817953 17.708,13.0617953 18.08,14.6647953 C14.368,14.4787953 10.91,12.7257953 8.566,9.84279527 C7.341,11.9507953 7.967,14.6497953 9.995,16.0047953 C9.261,15.9827953 8.542,15.7837953 7.9,15.4267953 L7.9,15.4847953 C7.9,17.6827953 9.449,19.5747953 11.603,20.0107953 C10.924,20.1957953 10.211,20.2227953 9.519,20.0897953 C10.124,21.9707953 11.856,23.2587953 13.832,23.2957953 C12.197,24.5797953 10.178,25.2777953 8.098,25.2747953 C7.731,25.2747953 7.364,25.2527953 7,25.2087953 C9.111,26.5627953 11.567,27.2817953 14.076,27.2787953" fill="#545454"></path>
+</g>
+</svg>
+</a>
+</div>
+<div class="divider divider--article-top"></div>
+<div class="tensorsite-detail__body">
+<meta content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVyX9h9jqUfN0LpVCwPg0iWNd4XDkKWd5hL7Wn9CwGLBZ5NyrEFTHHXu6yCxCaLL2szdaQMCkDuRdV4-JapbV329DYTjaH6ThpbzJlbvgunZK9dUgii1kAqcs-4zhyphenhyphenccaLsfffj7K3-8HFLybyOeaHjVl_n7jdPmD33o0TERamUgTdH7H3qhBLS2GuwtY/s1600/Tensorflow-septmber-update-social%20%282%29%20%281%29.png" name="twitter:image">
+<img src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/Tensorflow-septmber-update-social%20(2)%20(1).png" style="display: none;">
+
+<em>Posted by the TensorFlow team</em>
+
+<img border="0" data-original-height="800" data-original-width="1058" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/Tensorflow-septmber-update-header%20(4).png" data-action="zoom">
+
+<a name="more"></a><p></p>
+
+<p>We are releasing a hot-fix for an installation issue affecting the 
+TensorFlow installation process. The TensorFlow 2.15.0 Python package 
+was released such that it requested <code>tensorrt</code>-related 
+packages that cannot be found unless the user installs them beforehand 
+or provides additional installation flags. This dependency affected 
+anyone installing TensorFlow 2.15 alongside NVIDIA CUDA dependencies via
+ <code>pip install tensorflow[and-cuda]</code>. Depending on the 
+installation method, TensorFlow 2.14 would be installed instead of 2.15,
+ or users could receive an installation error due to those missing 
+dependencies.</p>
+  
+<p>To solve this issue as quickly as possible, we have released 
+TensorFlow 2.15.0.post1 for the Linux x86_64 platform. This version 
+removes the <code>tensorrt</code> Python package dependencies from the <code>tensorflow[and-cuda]</code> installation method. Support for TensorRT is otherwise unaffected as long as TensorRT is already installed on the system. Now, <code>pip install tensorflow[and-cuda]</code> works as originally intended for TensorFlow 2.15.</p>
+  
+<p>Using .post1 instead of a full minor release allowed us to push this 
+release out quickly. However, please be aware of the following caveat: 
+for users wishing to pin their Python dependency in a requirements file 
+or other situation, under Python's version specification rules, <code>tensorflow[and-cuda]==2.15.0</code> will not install this fixed version. Please use <code>==2.15.0.post1</code> to specify this exact version on Linux platforms, or a fuzzy version specification, such as <code>==2.15.<sup>*</sup></code>, to specify the most recent compatible version of TensorFlow 2.15 on all platforms.</p> 
+</div>
+</div>
+<div class="tensorsite-detail-footer">
+<div class="article-divider">
+<img alt="Diamond Article Divider" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/ic_article_end.svg">
+</div>
+<a class="tensorsite-chip" href="https://blog.tensorflow.org/search?label=Announcement&amp;max-results=20">
+Announcement
+</a>
+<a class="tensorsite-chip" href="https://blog.tensorflow.org/search?label=Explore&amp;max-results=20">
+Explore
+</a>
+<a class="tensorsite-chip" href="https://blog.tensorflow.org/search?label=Keras&amp;max-results=20">
+Keras
+</a>
+<a class="tensorsite-chip" href="https://blog.tensorflow.org/search?label=NVDIA&amp;max-results=20">
+NVDIA
+</a>
+<a class="tensorsite-chip" href="https://blog.tensorflow.org/search?label=TensorFlow+Core&amp;max-results=20">
+TensorFlow Core
+</a>
+</div>
+</div>
+<div class="tensorsite-next active">
+<div class="tensorsite-container--large">
+<div class="tensorsite-next__title">Next post</div>
+<div class="tensorsite-card">
+<a aria-label="Next Card" class="tensorsite-card__href next" href="https://blog.tensorflow.org/2023/11/half-precision-inference-doubles-on-device-inference-performance.html"></a>
+<div class="tensorsite-content__image-wrapper">
+<img alt="TensorFlow 2.15 update: hot-fix for Linux installation issue" class="tensorsite-content__image" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/TensorFlow_HalfPrecisionInference_1024x512.png">
+</div>
+<div class="tensorsite-content">
+<div class="tensorsite-content__subtitle next">
+<span>AI</span>
+<b class="label-divider-dot">·</b>
+<span>Announcement</span>
+</div>
+<div class="tensorsite-content__title next">
+Half-precision Inference Doubles On-Device Inference Performance
+</div>
+<p class="tensorsite-content__description next">November 29, 2023 — 
+Posted by Marat Dukhan and Frank Barchard, Software EngineersCPUs 
+deliver the widest reach for ML inference and remain the default target 
+for TensorFlow Lite. Consequently, improving CPU inference performance 
+is a top priority, and we are excited to announce that we doubled 
+floating-point inference performance in TensorFlow Lite’s XNNPack 
+backend by enabling half-precision inference on ARM CPUs. …</p>
+</div>
+</div>
+</div>
+</div>
+<!--Can't find substitution for tag [posts.post]-->
+</div></div>
+</div>
+<!-- End Page Container -->
+<div class="tensorsite-full-footer">
+<div class="section" id="footer"><div class="widget HTML" data-version="1" id="HTML2">
+<section class="tensorsite-footer grey">
+<div class="tensorsite-container tensorsite-footer__container">
+<div class="tensorsite-footer__side tensorsite-footer__side--left"></div>
+<div class="tensorsite-footer__side tensorsite-footer__side--right"></div>
+<div class="tensorsite-footer__content">
+<div class="tensorsite-content">
+<div class="tensorsite-content__title  tensorsite-content__title--grow">
+                                        Build, deploy, and experiment easily with TensorFlow </div>
+<div class="tensorsite-content__cta-wrapper">
+<a class="tensorsite-content__button tensorsite-button tensorsite-button--white" href="https://www.tensorflow.org/">
+                                        Get started
+                                    </a>
+</div>
+</div>
+</div>
+</div>
+<div class="tensorsite-footer__lines"></div>
+</section>
+<section class="social-icons">
+<div class="social-icons__container-footer">
+<a alt="TensorFlow Home" class="tensorsite-logo" href="https://www.tensorflow.org/">
+<img alt="TensorFlow Logo" class="tensorsite-logo__image" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/tf_lockup.svg">
+</a>
+<div class="footer__side--right">
+<div class="footer__links">
+<a alt="Youtube Social Link" class="footer-link" href="https://www.google.com/" rel="noopener noreferrer" target="_blank">
+                                    Google
+                                    </a>
+<a alt="Twitter Social Link" class="footer-link" href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">
+                                    Privacy
+                                    </a>
+<a alt="Github Link" class="footer-link" href="https://policies.google.com/terms" rel="noopener noreferrer" target="_blank">
+                                    Terms
+                                    </a>
+<a class="footer-link" href="https://blog.tensorflow.org/p/tensorflow-blog-contribution-notice.html">
+                                    Contributions notice
+                                    </a>
+</div>
+<div class="social-icons__links">
+<a alt="Youtube Social Link" class="icon-link" href="https://www.youtube.com/channel/UC0rqucBdTuFTjJiefW5t-IQ" rel="noopener noreferrer" target="_blank">
+<img src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/ic_youtube.svg"></a>
+<a alt="Twitter Social Link" class="icon-link" href="https://twitter.com/TensorFlow" rel="noopener noreferrer" target="_blank">
+<img src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/ic_twitter.svg"></a>
+<a alt="Github Link" class="icon-link" href="https://github.com/tensorflow" rel="noopener noreferrer" target="_blank">
+<img src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/ic_github.svg"></a>
+</div>
+</div>
+</div>
+</section>
+</div></div>
+</div>
+
+<script type="text/javascript" src="TensorFlow%202.15%20update_%20hot-fix%20for%20Linux%20installation%20issue%20%E2%80%94%20The%20TensorFlow%20Blog_files/338641159-widgets.js"></script>
+<script type="text/javascript">
+window['__wavt'] = 'AOuZoY6rbeJF6ulcOT1EfpVg5XQoGIpOqA:1728069771981';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d7864883956188652345','//blog.tensorflow.org/2023/12/tensorflow-215-update-hot-fix-linux-installation-issue.html','7864883956188652345');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '7864883956188652345', 'title': 'The TensorFlow Blog', 'url': 'https://blog.tensorflow.org/2023/12/tensorflow-215-update-hot-fix-linux-installation-issue.html', 'canonicalUrl': 'https://blog.tensorflow.org/2023/12/tensorflow-215-update-hot-fix-linux-installation-issue.html', 'homepageUrl': 'https://blog.tensorflow.org/', 'searchUrl': 'https://blog.tensorflow.org/search', 'canonicalHomepageUrl': 'https://blog.tensorflow.org/', 'blogspotFaviconUrl': 'https://blog.tensorflow.org/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': true, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': 'UA-142343919-1', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22The TensorFlow Blog - Atom\x22 href\x3d\x22https://blog.tensorflow.org/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22The TensorFlow Blog - RSS\x22 href\x3d\x22https://blog.tensorflow.org/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22The TensorFlow Blog - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/7864883956188652345/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22The TensorFlow Blog - Atom\x22 href\x3d\x22https://blog.tensorflow.org/feeds/412368123601550351/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/28ccc04eb7fa343f', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'Twitter', 'key': 'twitter', 'shareMessage': 'Share to Twitter', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'item', 'postId': '412368123601550351', 'postImageThumbnailUrl': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVyX9h9jqUfN0LpVCwPg0iWNd4XDkKWd5hL7Wn9CwGLBZ5NyrEFTHHXu6yCxCaLL2szdaQMCkDuRdV4-JapbV329DYTjaH6ThpbzJlbvgunZK9dUgii1kAqcs-4zhyphenhyphenccaLsfffj7K3-8HFLybyOeaHjVl_n7jdPmD33o0TERamUgTdH7H3qhBLS2GuwtY/s72-c/Tensorflow-septmber-update-social%20%282%29%20%281%29.png', 'postImageUrl': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVyX9h9jqUfN0LpVCwPg0iWNd4XDkKWd5hL7Wn9CwGLBZ5NyrEFTHHXu6yCxCaLL2szdaQMCkDuRdV4-JapbV329DYTjaH6ThpbzJlbvgunZK9dUgii1kAqcs-4zhyphenhyphenccaLsfffj7K3-8HFLybyOeaHjVl_n7jdPmD33o0TERamUgTdH7H3qhBLS2GuwtY/s1600/Tensorflow-septmber-update-social%20%282%29%20%281%29.png', 'pageName': 'TensorFlow 2.15 update: hot-fix for Linux installation issue', 'pageTitle': 'The TensorFlow Blog: TensorFlow 2.15 update: hot-fix for Linux installation issue', 'metaDescription': 'We are releasing a hot-fix for an installation issue affecting the TensorFlow installation process.'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': false, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'TensorFlow 2.15 update: hot-fix for Linux installation issue', 'description': 'We are releasing a hot-fix for an installation issue affecting the TensorFlow installation process.', 'featuredImage': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVyX9h9jqUfN0LpVCwPg0iWNd4XDkKWd5hL7Wn9CwGLBZ5NyrEFTHHXu6yCxCaLL2szdaQMCkDuRdV4-JapbV329DYTjaH6ThpbzJlbvgunZK9dUgii1kAqcs-4zhyphenhyphenccaLsfffj7K3-8HFLybyOeaHjVl_n7jdPmD33o0TERamUgTdH7H3qhBLS2GuwtY/s1600/Tensorflow-septmber-update-social%20%282%29%20%281%29.png', 'url': 'https://blog.tensorflow.org/2023/12/tensorflow-215-update-hot-fix-linux-installation-issue.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 412368123601550351}}]);
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'nav', document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FeaturedPostView', new _WidgetInfo('FeaturedPost1', 'blog', document.getElementById('FeaturedPost1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'blog', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/1203661419-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/13464135-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML2', 'footer', document.getElementById('HTML2'), {}, 'displayModeFull'));
+</script>
+
+</body></html>

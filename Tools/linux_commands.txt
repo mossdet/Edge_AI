@@ -1,0 +1,35 @@
+# Monitor GPU usage every 2 seconds
+nvidia-smi -l 2
+
+# Build and Install a specific python version
+
+sudo apt update
+# Install dependent libraries:
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
+# Download Python binary package:
+wget https://www.python.org/ftp/python/3.10.8/Python-3.10.8.tgz
+# Unzip the package:
+tar -xzf Python-3.10.8.tgz
+# Execute configure script
+cd Python-3.10.8
+./configure --enable-optimizations
+# Build Python 3.10
+make -j 2
+# Install Python 3.10
+sudo make install
+# Verify the installation
+python3.10
+
+#You should see:
+Python 3.10.8 (default, october 15 2022, 14:44:10)
+[GCC 6.3.0 20170516] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+
+# If you want to make Python 3.10 the default that runs when you type python, you can follow these steps:
+# Change ~/.bashrc file to add the following line:
+alias python='/usr/local/bin/python3.10'
+# And then run the following command to have it take effect in the current shell:
+source ~/.bashrc
+#You can verify it using the python --version command, which should now show:
+Python 3.10.8

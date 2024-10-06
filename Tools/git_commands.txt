@@ -1,0 +1,14 @@
+# How to add a project existing in the local computer to an already existing GitHub repository:
+git init
+git add --all
+git commit -m "my commit"
+git remote set-url origin git@github.com:username/repo.git
+(if firs time doing this then: git remote add)
+git push origin main
+
+# Recursively add the entire folder to a repository
+git add *
+git commit -m with the message
+git push
+
+
